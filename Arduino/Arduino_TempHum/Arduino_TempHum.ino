@@ -1,4 +1,3 @@
-//Projeto medir a temperatura e a umidade com DHT11
 #include <DHT.h>//Inclui a biblioteca DHT Sensor Library
 #define DHTPIN 5//Pino digital 2 conectado ao DHT11
 #define DHTTYPE DHT11//DHT 11
@@ -13,17 +12,17 @@ void setup() {
 void loop() {
   delay(2000);//Intervalo de dois segundos entre as medições
 
-  float h = dht.readHumidity();//lê o valor da umidade e armazena na variável h do tipo float (aceita números com casas decimais)
-  float t = dht.readTemperature();//lê o valor da temperatura e armazena na variável t do tipo float (aceita números com casas decimais)
+  float humidade = dht.readHumidity();//lê o valor da umidade e armazena na variável h do tipo float 
+  float temperatura = dht.readTemperature();//lê o valor da temperatura e armazena na variável t do tipo float 
 
-  if (isnan(h) || isnan(t)) {//Verifica se a umidade ou temperatura são ou não um número
+  if (isnan(humidade) || isnan(temperatura)) {//Verifica se a umidade ou temperatura são ou não um número
     return;//Caso não seja um número retorna
   }
 
   Serial.print("Umidade:");
-  Serial.println(h);
+  Serial.println(humidade);
   Serial.print("Temperatura:");
-  Serial.println(t);
+  Serial.println(temperatura);
 
   delay(1000);  // Add a delay to avoid flooding the serial port
 }

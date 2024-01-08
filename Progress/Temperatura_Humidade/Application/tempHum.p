@@ -4,8 +4,9 @@ USING System.Environment.
 DEFINE VARIABLE HttpClient AS CLASS System.Net.WebClient. 
 DEFINE VARIABLE webResponse AS LONGCHAR NO-UNDO.
 
+
 DEFINE TEMP-TABLE tmpArduino
-    FIELD  dados AS CHAR.
+    FIELD  dados  AS CHAR FORMAT "x(60)" .
 
 FIX-CODEPAGE (webResponse) = "UTF-8". 
 
@@ -17,8 +18,13 @@ webResponse = HttpClient:DownloadString("http://localhost:3000/dados").
 
 HttpClient:Dispose(). 
 DELETE OBJECT HttpClient. 
+      
 
-MESSAGE STRING(webResponse) SKIP
-    Environment:VERSION VIEW-AS ALERT-BOX.
+CREATE   tmpArduino.                    
+    ASSIGN  dados =   STRING(webResponse).
+
+DISPLAY  dados.
+                                            
 
    
+
